@@ -15,6 +15,50 @@ app.get("/", (req, res) => {
 
 app.post("/webhook", (req, res) => {
   res.send("HTTP POST request sent to the webhook URL!")
+  if (req.body.events[0].message.text === "何日") {
+    // 文字列化したメッセージデータ
+    const dataString = JSON.stringify({
+      replyToken: req.body.events[0].replyToken,
+      messages: [
+        {
+          "type": "text",
+          "text": new Date().toString()
+        },
+      ]
+    })
+
+    // リクエストヘッダー
+    const headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
+    }
+
+    // リクエストに渡すオプション
+    const webhookOptions = {
+      "hostname": "api.line.me",
+      "path": "/v2/bot/message/reply",
+      "method": "POST",
+      "headers": headers,
+      "body": dataString
+    }
+
+    // リクエストの定義
+    const request = https.request(webhookOptions, (res) => {
+      res.on("data", (d) => {
+        process.stdout.write(d)
+      })
+    })
+
+    // エラーをハンドル
+    request.on("error", (err) => {
+      console.error(err)
+    })
+
+    // データを送信
+    request.write(dataString)
+    request.end()
+  }
+
   // ユーザーがボットにメッセージを送った場合、返信メッセージを送る
   if (req.body.events[0].type === "message") {
     // 文字列化したメッセージデータ
