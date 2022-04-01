@@ -31,6 +31,9 @@ app.post("/webhook", (req, res) => {
       ]
     })
 
+    console.log(dataString)
+    console.log(token)
+
     // リクエストヘッダー
     const headers = {
       "Content-Type": "application/json",
