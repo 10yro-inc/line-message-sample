@@ -1,0 +1,22 @@
+{
+  "name": "line-message-sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/10yro-inc/line-message-sample.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/10yro-inc/line-message-sample/issues"
+  },
+  "homepage": "https://github.com/10yro-inc/line-message-sample#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
